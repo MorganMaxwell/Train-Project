@@ -24,9 +24,20 @@ $(document).ready(function () {
         var trainNameData = childSnapshot.val().trainName;
         var destinationData = childSnapshot.val().destination;
         var frequencyData = childSnapshot.val().frequency;
+        var firstTimeData = childSnapshot.val().firstTime;
         // this is going to get complicated with this math
-        var nextArrivalData = "TODO";
-        var minutesAwayData = "TODO";
+        var nextArrivalData;
+        var minutesAwayData;
+        var currentTimeMinutes = moment().minute();
+        function mathDoer() {
+            // STILL NEED TO PUT REAL MATH IN HERE
+            var modulus = currentTimeMinutes - 
+            var remainder = modulus % frequency;
+            minutesAwayData = frequency - remainder;
+            nextArrivalData = minutesAwayData + currentTimeMinutes;
+            console.log(currentTimeMinutes);
+        };
+        mathDoer();
         // this is to put the database data in a <td> element
         var trainName = $('<td>').text(trainNameData);
         var destination = $('<td>').text(destinationData);
@@ -37,8 +48,8 @@ $(document).ready(function () {
         newTableRow.append(trainName);
         newTableRow.append(destination);
         newTableRow.append(frequency);
-        newTableRow.append(nextArrival);
-        newTableRow.append(minutesAway)
+        newTableRow.append(nextArrivalData);
+        newTableRow.append(minutesAwayData);
         // finally, push the row to the page
         $('#tableData').append(newTableRow);
     });
