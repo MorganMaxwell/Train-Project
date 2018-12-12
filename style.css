@@ -4,4 +4,10 @@
 
 #userInput {
     margin-top: 5%;
+    margin-bottom: 10%;
 }
+
+input[type=text] {
+    width: 300px;
+}
+

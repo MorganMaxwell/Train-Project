@@ -26,30 +26,39 @@ $(document).ready(function () {
         var frequencyData = childSnapshot.val().frequency;
         var firstTimeData = childSnapshot.val().firstTime;
         // this is going to get complicated with this math
-        var nextArrivalData;
+        // I did this, but I couldn't have gotten here without the class repo work and I'm 
+        // worried about that
+        // var firstTimeData = "03:30";
+
         var minutesAwayData;
-        var currentTimeMinutes = moment().minute();
-        function mathDoer() {
-            // STILL NEED TO PUT REAL MATH IN HERE
-            var modulus = currentTimeMinutes - 
-            var remainder = modulus % frequency;
-            minutesAwayData = frequency - remainder;
-            nextArrivalData = minutesAwayData + currentTimeMinutes;
-            console.log(currentTimeMinutes);
-        };
-        mathDoer();
+        var nextArrivalData;
+        var firstTimeMoment = moment(firstTimeData, "HH:mm");
+
+        var compare = moment().diff(firstTimeMoment, "minutes");
+        console.log(compare);
+
+        var remainder = compare % frequencyData;
+        console.log(remainder);
+
+        var minutesAwayData = frequencyData - remainder;
+        console.log(minutesAwayData);
+
+        var nextArrivalData = moment().add(minutesAwayData, "minutes");
+        console.log(moment(nextArrivalData).format("HH:mm"));
+
+
         // this is to put the database data in a <td> element
         var trainName = $('<td>').text(trainNameData);
         var destination = $('<td>').text(destinationData);
         var frequency = $('<td>').text(frequencyData);
-        var nextArrival = $('<td>').text(nextArrivalData);
-        var minutesAwayData = $('<td>').text(minutesAwayData);
+        var nextArrival = $('<td>').text(moment(nextArrivalData).format("HH:mm"));
+        var minutesAway = $('<td>').text(minutesAwayData);
         // this is to put all of that data into the table row
         newTableRow.append(trainName);
         newTableRow.append(destination);
         newTableRow.append(frequency);
-        newTableRow.append(nextArrivalData);
-        newTableRow.append(minutesAwayData);
+        newTableRow.append(nextArrival);
+        newTableRow.append(minutesAway);
         // finally, push the row to the page
         $('#tableData').append(newTableRow);
     });
