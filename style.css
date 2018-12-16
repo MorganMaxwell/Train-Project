@@ -11,3 +11,30 @@ input[type=text] {
     width: 300px;
 }
 
+.jumbotron {
+    background: skyblue;
+    margin-bottom: 0;
+}
+
+#userInput {
+    padding: 20px;
+    border-radius: 5px;
+    background: skyblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+::-webkit-input-placeholder {
+    color: slategray;
+}
+#trainName, #destination, #firstTime, #frequency {
+    background: lightgoldenrodyellow;
+}
+
+#submit {
+    
+    background: white;
+    color: slategray;
+}
